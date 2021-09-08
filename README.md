@@ -40,7 +40,7 @@ WHEN the user refreshes the page
 THEN the saved events persist
 
 ## ScreenShot
-https://user-images.githubusercontent.com/58919468/132579829-9b0bfd6a-c3be-477d-be84-e2e4773dc42f.png
+<img width="1178" alt="Screen Shot 2021-09-08 at 4 18 53 PM" src="https://user-images.githubusercontent.com/58919468/132579829-9b0bfd6a-c3be-477d-be84-e2e4773dc42f.png">
  
 
 ## Deployed URL 
