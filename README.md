@@ -45,7 +45,7 @@ THEN the saved events persist
 
 ## Deployed URL 
 
-
+https://andrewbumnc.github.io/day-planner/
 
 ## Github Link
 
