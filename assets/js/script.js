@@ -45,16 +45,27 @@ setInterval(displayTime, 1000);
 
 function hourTracker() {
   var hourNow = moment().hours()
-  console.log(hourNow)
   var inputGroup = $('.input-group')
   inputGroup.each(function () {
     var trackHour = parseInt($(this).attr("id"))
-    console.log(trackHour)
-    
-    if (trackHour <= hourNow) {
+  
+    if (trackHour > hourNow) {
+      console.log("present?")
+      $((this)).addClass("future")
+    }
+
+    if (trackHour === hourNow) {
+      $((this)).addClass("present")
+    }
+
+
+    if (trackHour < hourNow) {
       
       $((this)).addClass("past")
+
     } 
+    
+   
   });
 }
 

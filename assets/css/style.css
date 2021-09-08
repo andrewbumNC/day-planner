@@ -49,10 +49,6 @@ textarea {
   border: solid black 1px;
 }
 
-.present {
-  background-color: #ff6961;
-  color: white;
-}
 
 .future {
   background-color: #77dd77;
@@ -92,4 +88,14 @@ textarea {
   color: white;
   font-size: 14px;
   
+}
+
+
+.present textarea {
+  background-color: rgb(221, 221, 123);
+
+}
+
+.future textarea {
+  background-color:#77dd77  ;
 }
