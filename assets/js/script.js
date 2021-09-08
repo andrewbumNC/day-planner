@@ -1,3 +1,4 @@
+
 var dateTracker = $('#currentDay');
 var eightAm = $('#eightAm')
 var inputGroup = $(".input-group")
@@ -16,22 +17,22 @@ var saveButton9 = $('#save-btn9');
 var saveButton10 = $('#save-btn10');
 var saveButton11 = $('#save-btn11');
 var saveButton12 = $('#save-btn12');
-var saveButton1 = $('#save-btn1');
-var saveButton2 = $('#save-btn2');
-var saveButton3 = $('#save-btn3');
-var saveButton4 = $('#save-btn4');
-var saveButton5 = $('#save-btn5');
+var saveButton13 = $('#save-btn13');
+var saveButton14 = $('#save-btn14');
+var saveButton15 = $('#save-btn15');
+var saveButton16 = $('#save-btn16');
+var saveButton17 = $('#save-btn17');
 
 var isSaved8 = true;
 var isSaved9 = true;
 var isSaved10 = true;
 var isSaved11 = true;
 var isSaved12 = true;
-var isSaved1 = true;
-var isSaved2 = true;
-var isSaved3 = true;
-var isSaved4 = true;
-var isSaved5 = true;
+var isSaved13 = true;
+var isSaved14 = true;
+var isSaved15 = true;
+var isSaved16 = true;
+var isSaved17 = true;
 
 //This creates and renders the time tracker at top of planner
 function displayTime() {
@@ -42,83 +43,88 @@ function displayTime() {
 }
 setInterval(displayTime, 1000);
 
-
-hourTracker()
-
 function hourTracker() {
   var hourNow = moment().hours()
+  console.log(hourNow)
   var inputGroup = $('.input-group')
   inputGroup.each(function () {
     var trackHour = parseInt($(this).attr("id"))
     console.log(trackHour)
-
+    
+    if (trackHour <= hourNow) {
+      
+      $((this)).addClass("past")
+    } 
   });
 }
 
 
-//Why won't this assign 
-function assignHour() {
-  for (var i = 0; i < 8; i++) {
 
+function renderLastSave() { 
 
-    $(".input-group").children().eq(2).children(0).addClass('saveButton' + i)
-    $(".saveButton" + i).css('color', 'red');
+var savedItems = { 
+ eight: JSON.parse(localStorage.getItem("eightAm")),
+ nine: JSON.parse(localStorage.getItem("nineAm")),
+ ten: JSON.parse(localStorage.getItem("tenAm")),
+ eleven: JSON.parse(localStorage.getItem("elevenAm")),
+ twelve: JSON.parse(localStorage.getItem("twelvePm")),
+  one: JSON.parse(localStorage.getItem("onePm")),
+  two: JSON.parse(localStorage.getItem("twoPm")),
+  three: JSON.parse(localStorage.getItem("threePm")),
+  four: JSON.parse(localStorage.getItem("fourPm")),
+  five: JSON.parse(localStorage.getItem("fivePm")),
+} 
+console.log(savedItems.eight)
+console.log(savedItems.one)
 
-
-
-
-  }
+document.getElementById("eightAm").innerHTML = savedItems.eight
+document.getElementById("nineAm").innerHTML = savedItems.nine
+document.getElementById("tenAm").innerHTML = savedItems.ten
+document.getElementById("elevenAm").innerHTML = savedItems.eleven
+document.getElementById("twelvePm").innerHTML = savedItems.twelve
+document.getElementById("onePm").innerHTML = savedItems.one
+document.getElementById("twoPm").innerHTML = savedItems.two
+document.getElementById("threePm").innerHTML = savedItems.three
+document.getElementById("fourPm").innerHTML = savedItems.four
+document.getElementById("fivePm").innerHTML = savedItems.five
 }
 
 
-assignHour()
+renderLastSave()
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//quite a bit of hard code. First draft: 
 
 
 
 //save to local storage button
 saveButton8.on('click', function () {
-  if (isSaved8 || saveButton8 === $('#save-btn8')) {
-    localStorage.setItem("eightAm", JSON.stringify(eightAm.val()));
-    isSaved8 = !isSaved8;
-  } else {
-    console.log("is it false?")
-    localStorage.removeItem("eightAm")
-    isSaved8 = !isSaved8;
-  }
+  console.log("savebutton8working")
+  eight()
+ 
 });
 
 
-//save to local storage button
+function eight() { 
+if (isSaved8 || saveButton8 === $('#save-btn8')) {
+  localStorage.setItem("eightAm", JSON.stringify(eightAm.val()));
+  isSaved8 = !isSaved8;
+} else {
+  
+  localStorage.removeItem("eightAm", eightAm)
+  isSaved8 = !isSaved8;
+}};
+
+
 saveButton9.on('click', function () {
   if (isSaved9 || saveButton9 === $('#save-btn9')) {
     localStorage.setItem("nineAm", JSON.stringify(nineAm.val()));
     isSaved9 = !isSaved9;
   } else {
-    console.log("is it false?")
-    localStorage.removeItem("nineAm") 
+    
+    localStorage.removeItem("nineAm", nineAm) 
     isSaved9 = !isSaved9;
   }
 });
@@ -128,8 +134,8 @@ saveButton10.on('click', function () {
     localStorage.setItem("tenAm", JSON.stringify(tenAm.val()));
     isSaved10 = !isSaved10;
   } else {
-    console.log("is it false?")
-    localStorage.removeItem("tenAm")
+   
+    localStorage.removeItem("tenAm", tenAm)
     isSaved10 = !isSaved10;
   }
 });
@@ -139,159 +145,79 @@ if (isSaved11 || saveButton11 === $('#save-btn11')) {
   localStorage.setItem("elevenAm", JSON.stringify(elevenAm.val()));
   isSaved11 = !isSaved11;
 } else {
-  console.log("is it false?")
-  localStorage.removeItem("elevenAm") 
+  
+  localStorage.removeItem("elevenAm", elevenAm) 
   isSaved11 = !isSaved11;
 }
 });
 
 saveButton12.on('click', function () {
   if (isSaved12 || saveButton12 === $('#save-btn12')) {
-    localStorage.setItem("twelvePm", JSON.stringify(twelveAm.val()));
+    localStorage.setItem("twelvePm", JSON.stringify(twelvePm.val()));
     isSaved12 = !isSaved12;
   } else {
-    console.log("is it false?")
+    
     localStorage.removeItem("twelvePm") 
     isSaved12 = !isSaved12;
   }
   });
 
-  saveButton1.on('click', function () {
-    if (isSaved1 || saveButton1 === $('#save-btn1')) {
+  saveButton13.on('click', function () {
+    if (isSaved13) {
       localStorage.setItem("onePm", JSON.stringify(onePm.val()));
-      isSaved1 = !isSaved1;
+      isSaved13 = !isSaved13;
     } else {
-      console.log("is it false?")
+   
       localStorage.removeItem("onePm") 
-      isSaved1 = !isSaved1;
+      isSaved13 = !isSaved13;
     }
     });
 
-    saveButton2.on('click', function () {
-      if (isSaved2 || saveButton2 === $('#save-btn2')) {
+    saveButton14.on('click', function () {
+      if (isSaved14) {
         localStorage.setItem("twoPm", JSON.stringify(twoPm.val()));
-        isSaved2 = !isSaved2;
+        isSaved14 = !isSaved14;
       } else {
-        console.log("is it false?")
+       
         localStorage.removeItem("twoPm") 
-        isSaved2 = !isSaved2;
+        isSaved14 = !isSaved14;
       }
       });
 
-      saveButton3.on('click', function () {
-        if (isSaved3 || saveButton3 === $('#save-btn3')) {
-          localStorage.setItem("twoPm", JSON.stringify(threePm.val()));
-          isSaved3 = !isSaved3;
+      saveButton15.on('click', function () {
+        if (isSaved15) {
+          localStorage.setItem("threePm", JSON.stringify(threePm.val()));
+          isSaved15 = !isSaved15;
         } else {
-          console.log("is it false?")
+          
           localStorage.removeItem("threePm") 
-          isSaved3 = !isSaved3;
+          isSaved15 = !isSaved15;
         }
         });
 
-        saveButton3.on('click', function () {
-          if (isSaved3 || saveButton3 === $('#save-btn3')) {
-            localStorage.setItem("threePm", JSON.stringify(threePm.val()));
-            isSaved3 = !isSaved3;
+        saveButton16.on('click', function () {
+          if (isSaved16) {
+            localStorage.setItem("fourPm", JSON.stringify(fourPm.val()));
+            isSaved16 = !isSaved16;
           } else {
-            console.log("is it false?")
-            localStorage.removeItem("threePm") 
-            isSaved3 = !isSaved3;
+           
+            localStorage.removeItem("fourPm") 
+            isSaved16 = !isSaved16;
           }
           });
 
-          saveButton4.on('click', function () {
-            if (isSaved4 || saveButton4 === $('#save-btn4')) {
-              localStorage.setItem("fourPm", JSON.stringify(fourPm.val()));
-              isSaved4 = !isSaved4;
+          saveButton17.on('click', function () {
+            if (isSaved17 || saveButton17 === $('#save-btn4')) {
+              localStorage.setItem("fivePm", JSON.stringify(fivePm.val()));
+              isSaved17 = !isSaved17;
             } else {
-              console.log("is it false?")
-              localStorage.removeItem("fourPm") 
-              isSaved4 = !isSaved4;
+              
+              localStorage.removeItem("fivePm") 
+              isSaved17 = !isSaved17;
             }
             });
 
-            saveButton5.on('click', function () {
-              if (isSaved5 || saveButton5 === $('#save-btn5')) {
-                localStorage.setItem("fivePm", JSON.stringify(fivePm.val()));
-                isSaved5 = !isSaved5;
-              } else {
-                console.log("is it false?")
-                localStorage.removeItem("fivePm") 
-                isSaved5 = !isSaved5;
-              }
-              });
 
 
-//this 
-function backgroundShading1() {}
-
-var today = new moment().hours();
-
-if (today >= 9) {
-  $('#eightAm').css('background-color', 'red')
-} else {
-  eightAm.css('background-color', 'white')
-}
-
-if (today >= 10) {
-  $('#nineAm').css('background-color', 'red')
-} else {
-  $('#nineAm').css('background-color', 'white')
-}
-
-if (today >= 11) {
-  $('#tenAm').css('background-color', 'red')
-} else {
-  $('#tenAm').css('background-color', 'white')
-}
-
-if (today >= 12) {
-  $('#elevenAm').css('background-color', 'red')
-} else {
-  $('#elevenAm').css('background-color', 'white')
-}
-
-if (today >= 13) {
-  $('#twelvePm').css('background-color', 'red')
-} else {
-  $('#twelvePm').css('background-color', 'white')
-}
-
-if (today >= 14) {
-  $('#onePm').css('background-color', 'red')
-} else {
-  $('#onePm').css('background-color', 'white')
-}
-
-if (today >= 15) {
-  $('#twoPm').css('background-color', 'red')
-} else {
-  $('#twoPm').css('background-color', 'white')
-}
-
-if (today >= 16) {
-  $('#threePm').css('background-color', 'red')
-} else {
-  $('#threePm').css('background-color', 'white')
-}
-
-if (today >= 17) {
-  $('#fourPm').css('background-color', 'red')
-} else {
-  $('#fourPm').css('background-color', 'white')
-}
-
-if (today >= 18) {
-  $('#fivePm').css('background-color', 'red')
-} else {
-  $('#fivePm').css('background-color', 'white')
-}
-
-backgroundShading1()
-
-
-
-
-
+hourTracker()
 
